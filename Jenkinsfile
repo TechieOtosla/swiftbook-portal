@@ -24,6 +24,7 @@ pipeline {
                 sh '''
                     set -eu
 
+                    umask 0022
                     printf 'Jenkins build-shell umask: '
                     umask
 
