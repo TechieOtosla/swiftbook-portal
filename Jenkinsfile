@@ -114,7 +114,7 @@ pipeline {
                          attempt=1
                          while [ "$attempt" -le 12 ]; do
                              if sha256sum /opt/tomcat/webapps/swiftbook-portal.war | grep -F "4105a6f92ee6e0b4efd7e1889e21fa05a03213f3a83b7821a53b072f4b3295bc" \
-                                && grep -Fqx "version=1.0.3" /opt/tomcat/webapps/swiftbook-portal/META-INF/maven/com.swiftbook/swiftbook-portal/pom.properties \
+                                && unzip -p /opt/tomcat/webapps/swiftbook-portal.war META-INF/maven/com.swiftbook/swiftbook-portal/pom.properties | grep -Fqx "version=1.0.3" \
                                 && curl -fsS --connect-timeout 5 --max-time 15 http://127.0.0.1:8080/swiftbook-portal/ >/dev/null; then
                                  echo "Production deployment verified successfully."
                                  exit 0
