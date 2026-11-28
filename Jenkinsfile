@@ -24,6 +24,7 @@ pipeline {
                 sh '''
                     set -eu
 
+                    chmod 644 pom.xml
                     mvn -s /home/jenkins/.m2/settings.xml clean package
 
                     unzip -p target/swiftbook-portal.war \
