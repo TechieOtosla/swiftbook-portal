@@ -24,8 +24,13 @@ pipeline {
                 sh '''
                     set -eu
 
+                    printf 'Jenkins build-shell umask: '
+                    umask
+
                     chmod 644 pom.xml
                     mvn -s /home/jenkins/.m2/settings.xml clean package
+
+                    stat -c 'Generated metadata: %a %A %U:%G %n' target/maven-archiver/pom.properties
 
                     unzip -p target/swiftbook-portal.war \
                         META-INF/maven/com.swiftbook/swiftbook-portal/pom.properties \
